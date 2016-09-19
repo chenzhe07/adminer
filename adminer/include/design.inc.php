@@ -49,6 +49,7 @@ var offlineMessage = '<?php echo js_escape(lang('You are offline.')); ?>';
 		echo '<p id="breadcrumb"><a href="' . h($link ? $link : ".") . '">' . $drivers[DRIVER] . '</a> &raquo; ';
 		$link = substr(preg_replace('~\b(db|ns)=[^&]*&~', '', ME), 0, -1);
 		$server = (SERVER != "" ? h(SERVER) : lang('Server'));
+		$server .= (is_readonly() ? " - slave" : " - master");
 		if ($breadcrumb === false) {
 			echo "$server\n";
 		} else {
@@ -69,6 +70,7 @@ var offlineMessage = '<?php echo js_escape(lang('You are offline.')); ?>';
 			}
 			echo "$title\n";
 		}
+		$title_all .= (is_readonly() ? " - slave" : " - master");
 	}
 	echo "<h2>$title_all</h2>\n";
 	echo "<div id='ajaxstatus' class='jsonly hidden'></div>\n";

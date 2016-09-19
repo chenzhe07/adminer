@@ -455,6 +455,11 @@ if (!defined("DRIVER")) {
 		return $table_status["Engine"] === null;
 	}
 
+	function is_readonly() {
+		global $connection;
+		return $connection->result("SELECT @@read_only") == 1;
+	}
+
 	/** Check if table supports foreign keys
 	* @param array result of table_status
 	* @return bool
