@@ -460,6 +460,15 @@ if (!defined("DRIVER")) {
 		return $connection->result("SELECT @@read_only") == 1;
 	}
 
+	function is_slave() {
+	    global $connection;
+	    $result_msg = $connection->query('SHOW SLAVE STATUS');
+	    if (!$result_msg) {
+	        return false;
+	    }
+	    return $result_msg->num_rows == 1;
+	}
+
 	/** Check if table supports foreign keys
 	* @param array result of table_status
 	* @return bool
